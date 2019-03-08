@@ -1,0 +1,32 @@
+model: 'vgg16'
+rpn_pooling_mode: 'align'
+
+cuda: True
+cudnn_benchmark: False
+
+# 数据集
+dataset_name: ['voc_2007']
+dataset_type: ['voc']
+dataset_path: ['/dataset/pascal_voc/VOC2007']
+image_set: ['test']
+use_difficult: [True]
+num_classes: 21
+
+# 日志, 缓存
+log_folder: './output/logs'
+cache_path: './output/cache'
+
+test:
+  metric: 'voc'
+  use_voc_2007_metric: True
+
+  nms_threshold: 0.3
+  max_per_image: 100
+
+  test_mode: 'default'
+#  test_mode: 'select_top_score'
+
+  model: './output/model/model-70000.pth'
+  output_dir: './output/eval'
+
+

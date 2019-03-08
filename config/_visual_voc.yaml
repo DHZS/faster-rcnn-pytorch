@@ -1,0 +1,39 @@
+model: 'vgg16'
+rpn_pooling_mode: 'align'
+
+cuda: True
+cudnn_benchmark: False
+
+# 数据集
+dataset_name: ['voc_2007']
+dataset_type: ['voc']
+dataset_path: ['/dataset/pascal_voc/VOC2007']
+image_set: ['test']
+use_difficult: [True]
+num_classes: 21
+
+# 日志, 缓存
+log_folder: './output/logs'
+cache_path: './output/cache'
+
+train:
+  shortest_side: 600
+
+test:
+  metric: 'voc'
+  use_voc_2007_metric: True
+
+  # RPN 阶段 NMS
+  rpn_post_nms_top_k: 300
+  rpn_nms_threshold: 0.7
+
+
+  nms_threshold: 0.3
+  max_per_image: 100
+
+  test_mode: 'default'
+  # test_mode: 'select_top_score'
+
+  model: './output/faster_rcnn_class_specific_epoch7_pytorch_1.0.pth'
+  output_dir: './output/visual'
+
